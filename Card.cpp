@@ -7,15 +7,24 @@ Date: 11/08/2023
 
 #include "Card.hpp"
 
-//Destructor
+/*
+   Destructor for the Card class.
+   Deletes the dynamically allocated memory for the bitmap array.
+*/
 Card::~Card() {
     delete[] bitmap_;
 }
 
-//Copy Constructor
+/*
+   Copy constructor for the Card class.
+   Copies the attributes from the provided Card object.
+*/
 Card::Card(const Card& rhs) : cardType_{rhs.cardType_}, instruction_{rhs.instruction_}, bitmap_{rhs.bitmap_}, drawn_{rhs.drawn_} {}
 
-//Copy Assignment Operator
+/*
+   Copy assignment operator for the Card class.
+   Copies the attributes from the provided Card object, ensuring proper handling of the bitmap array.
+*/
 Card& Card::operator=(const Card& rhs) {
     cardType_ = rhs.cardType_;
     instruction_ = rhs.instruction_;
@@ -27,7 +36,10 @@ Card& Card::operator=(const Card& rhs) {
     return *this;
 }
 
-//Move Constructor
+/*
+   Move constructor for the Card class.
+   Moves the attributes from the provided Card object.
+*/
 Card::Card(Card&& rhs) {
     cardType_ = std::move(rhs.cardType_);
     instruction_ = std::move(rhs.instruction_);
@@ -35,7 +47,10 @@ Card::Card(Card&& rhs) {
     drawn_ = std::move(rhs.drawn_);
 }
 
-//Move Assignment Operator
+/*
+   Move assignment operator for the Card class.
+   Moves the attributes from the provided Card object.
+*/
 Card& Card::operator=(Card&& rhs) {
     cardType_ = std::move(rhs.cardType_);
     instruction_ = std::move(rhs.instruction_);
@@ -44,8 +59,10 @@ Card& Card::operator=(Card&& rhs) {
     return *this;
 }
 
-
-//Default Constructor
+/*
+   Default constructor for the Card class.
+   Initializes the card as a point card with empty instruction, zero bitmap, and not drawn.
+*/
 Card::Card() {
     cardType_ = POINT_CARD;
     instruction_ = "";
@@ -53,42 +70,58 @@ Card::Card() {
     drawn_ = false;
 }
 
-//Return string representation of the card type
+/*
+   Returns a string representation of the card type ("POINT_CARD" or "ACTION_CARD").
+*/
 std::string Card::getType() const {
     return (cardType_ == POINT_CARD) ? "POINT_CARD" : "ACTION_CARD";
 }
 
-//Set card type
+/*
+   Sets the card type to the provided type (POINT_CARD or ACTION_CARD).
+*/
 void Card::setType(const CardType& type) {
     cardType_ = type;
 }
 
-//Return string representation of card instruction
+/*
+   Returns a constant reference to the instruction associated with the card.
+*/
 const std::string& Card::getInstruction() const {
     return instruction_;
 }
 
-//Set card instruction
+/*
+   Sets the instruction for the card.
+*/
 void Card::setInstruction(const std::string& instruction) {
     instruction_ = instruction;
 }
 
-//Return image data
+/*
+   Returns a constant pointer to the bitmap data associated with the card.
+*/
 const int* Card::getImageData() const {
     return bitmap_;
 }
 
-//Set image data
+/*
+   Sets the bitmap data for the card.
+*/
 void Card::setImageData(int* data) {
     bitmap_ = data;
 }
 
-//Return drawn status of the card
+/*
+   Returns a boolean indicating whether the card has been drawn.
+*/
 bool Card::getDrawn() const {
     return drawn_;
 }
 
-//Set drawn status of the card
+/*
+   Sets the drawn status for the card.
+*/
 void Card::setDrawn(const bool& drawn) {
     drawn_ = drawn;
 }

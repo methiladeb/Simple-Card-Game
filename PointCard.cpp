@@ -2,29 +2,40 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Methila Deb
-Date: 11/03/2023
+Date: 11/08/2023
 */
+
 #include "PointCard.hpp"
 
-//Constructor
+
+/*
+   Default constructor for the PointCard class.
+   Sets the card type to POINT_CARD upon construction.
+*/
 PointCard::PointCard() {
-    setType(CardType::POINT_CARD); // Set the card type to POINT_CARD
+    setType(CardType::POINT_CARD); 
 }
 
-//Determine if the PointCard is playable
+/*
+   Checks if the point card is playable.
+   Attempts to convert the instruction to an integer.
+   Returns true if successful, indicating a playable card. Otherwise, returns false.
+*/
 bool PointCard::isPlayable() {
     const std::string instruction = getInstruction();
     try {
         int points = std::stoi(instruction);
-        return true; // Card is playable
+        return true; 
     } 
     catch (const std::invalid_argument&) {
-        // Invalid number, card is not playable
-        return false; // Card not playable
+        return false; 
     }
 }
 
-//Print PointCard
+/*
+   Prints information about the PointCard.
+   Displays the card type, points, and the associated image data (if available).
+*/
 void PointCard::Print() const {
     std::cout << "Type: POINT_CARD" << std::endl;
     std::cout << "Points: " << getInstruction() << std::endl;

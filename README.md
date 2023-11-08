@@ -1,5 +1,5 @@
 # Simple-Card-Game
-This is a simple card game for a cs class.
+This is a CSCI 33500 Fall 2023 project that simulates a card game environment with classes such as Player, ActionCard, PointCard, Deck, and Hand. The Player class manages hands, scores, and interactions between players. ActionCard and PointCard extend the Card base class, offering specialized functions for checking playability and printing details. The Deck class, a template, handles the addition, drawing, and shuffling of cards. Lastly, the Hand class manages the player's hand, supporting operations like reversing and playing cards. 
 
 ## Instructions:
 

@@ -2,22 +2,34 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Methila Deb
-Date: 11/03/2023
+Date: 11/08/2023
 */
+
 #include "Hand.hpp"
 
-//Default Constructor
+
+/*
+   Default constructor for the Hand class.
+   Initializes an empty hand.
+*/
 Hand::Hand() = default;
 
-//Destructor
-Hand::~Hand() {
-    
-}
+/*
+   Destructor for the Hand class.
+   No dynamic memory management needed, as the hand is based on a deque.
+*/
+Hand::~Hand() {}
 
-//Copy Constructor
+/*
+   Copy constructor for the Hand class.
+   Copies the cards from the provided Hand object.
+*/
 Hand::Hand(const Hand& other) : cards_(other.cards_) {}
 
-//Copy Assignment Operator
+/*
+   Copy assignment operator for the Hand class.
+   Copies the cards from the provided Hand object, avoiding self-assignment.
+*/
 Hand& Hand::operator=(const Hand& other) {
     if (this != &other) {
         cards_ = other.cards_;
@@ -25,47 +37,66 @@ Hand& Hand::operator=(const Hand& other) {
     return *this;
 }
 
-//Move Constructor
+/*
+   Move constructor for the Hand class.
+   Moves the cards from the provided Hand object.
+*/
 Hand::Hand(Hand&& other) {
     cards_ = std::move(other.cards_);
 }
 
-//Move Assignment Operator
+/*
+   Move assignment operator for the Hand class.
+   Moves the cards from the provided Hand object.
+*/
 Hand& Hand::operator=(Hand&& other) {
     cards_ = std::move(other.cards_);
     return *this;
 }
 
-//Get the cards in the hand
+/*
+   Returns a constant reference to the cards in the hand.
+*/
 const std::deque<PointCard>& Hand::getCards() const {
     return cards_;
 }
 
-//Add a card to the hand
+/*
+   Adds a point card to the hand.
+   Sets the drawn status of the card to true and appends it to the hand.
+*/
 void Hand::addCard(PointCard&& card) {
     card.setDrawn(true);
     cards_.push_back(card);
 }
 
-//Check if the hand is empty
+/*
+   Checks if the hand is empty.
+   Returns true if the hand has no cards, otherwise false.
+*/
 bool Hand::isEmpty() const {
     return cards_.empty();
 }
 
-//Reverse the hand
+/*
+   Reverses the order of cards in the hand.
+   Swaps the positions of cards from the left and right ends of the hand.
+*/
 void Hand::Reverse() {
     int left = 0;
     int right = cards_.size() - 1;
-    
     while (left < right) {
-        // Swap the elements at 'left' and 'right'
         std::swap(cards_[left], cards_[right]);
         left++;
         right--;
     }
 }
 
-//Play a card from the hand
+/*
+   Plays a card from the hand.
+   If the hand is empty or the front card is not playable, throws an error.
+   Returns the points associated with the played card and removes it from the hand.
+*/
 int Hand::PlayCard() {
     if(isEmpty()) {
         throw std::runtime_error("Hand is empty. Cannot play a card.");
@@ -78,5 +109,4 @@ int Hand::PlayCard() {
     int points = std::stoi(frontOfCard.getInstruction());
     cards_.pop_front();
     return points;
-
 }
